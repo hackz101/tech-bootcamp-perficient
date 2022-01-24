@@ -1,10 +1,17 @@
 package com.perficient.techbootcampHaydenBaca;
 
+import java.util.ArrayList;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -31,9 +38,30 @@ public class OwnerEntity {
 	@Column(name = "State", length = 255)
 	private String state;
 	
+	@OneToMany(mappedBy = "owner", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private Set<DogEntity> dogs;
+	
+	
+	public OwnerEntity() {
+		super();
+	}
+	
+	public OwnerEntity(String firstName, String lastName, String address, String city, String state) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.address = address;
+		this.city = city;
+		this.state = state;
+	}
+	
 	//getters and setters
 	public int getPersonID() {
 			return personID;
+	}
+	
+	public void setPersonID(int personID) {
+		this.personID = personID;
 	}
 	
 	public String getFirstName() {
@@ -75,5 +103,7 @@ public class OwnerEntity {
 	public void setState(String state) {
 		this.state = state;
 	}
+	
+	
 	
 }
