@@ -1,4 +1,4 @@
-package com.perficient.techbootcampHaydenBaca;
+package com.perficient.techbootcampHaydenBaca.controllers;
 
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
