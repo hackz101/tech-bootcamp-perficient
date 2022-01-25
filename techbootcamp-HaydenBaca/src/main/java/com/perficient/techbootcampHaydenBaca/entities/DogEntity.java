@@ -1,5 +1,6 @@
 package com.perficient.techbootcampHaydenBaca.entities;
 
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -22,19 +23,28 @@ public class DogEntity {
 	@Column(name = "dogname", length = 255)
 	private String dogName;
 	
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-	@JoinColumn(name = "dogowner", nullable = false)
-	private OwnerEntity owner;
+	@Column(name = "dogbreed", length = 255)
+	private String dogBreed;
+	
+	@Column(name = "dogowner")
+	@JoinColumn(name = "dogowner", referencedColumnName = "personid", nullable = false)
+	private int dogOwner;
+	
+	//@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	//@JoinColumn(name = "dogowner", referencedColumnName = "personid", nullable = false)
+	//private OwnerEntity owner;
 	
 	
 	public DogEntity() {
 		super();
 	}
 	
-	public DogEntity(String dogName, OwnerEntity owner) {
+	public DogEntity(String dogName, String dogBreed, int dogOwner) {//, OwnerEntity owner) {
 		super();
 		this.dogName = dogName;
-		this.owner = owner;
+		this.dogBreed = dogBreed;
+		this.dogOwner = dogOwner;
+		//this.owner = owner;
 	}
 	
 	//getters and setters
@@ -54,13 +64,31 @@ public class DogEntity {
 		this.dogName = dogName;
 	}
 
-	public OwnerEntity getOwner() {
+	public String getDogBreed() {
+		return dogBreed;
+	}
+
+	public void setDogBreed(String dogBreed) {
+		this.dogBreed = dogBreed;
+	}
+
+	public int getDogOwner() {
+		return dogOwner;
+	}
+
+	public void setDogOwner(int dogOwner) {
+		this.dogOwner = dogOwner;
+	}
+
+	/*public OwnerEntity getOwner() {
 		return owner;
 	}
 
 	public void setOwner(OwnerEntity owner) {
 		this.owner = owner;
-	}
+	}*/
+	
+	
 	
 	
 	

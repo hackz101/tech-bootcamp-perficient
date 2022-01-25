@@ -1,8 +1,6 @@
 package com.perficient.techbootcampHaydenBaca.entities;
 
-import java.util.Set;
-
-import javax.persistence.CascadeType;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -36,8 +34,8 @@ public class OwnerEntity {
 	@Column(name = "State", length = 255)
 	private String state;
 	
-	@OneToMany(mappedBy = "owner", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private Set<DogEntity> dogs;
+	//@OneToMany(mappedBy = "owner", fetch = FetchType.LAZY)//, cascade = CascadeType.ALL)
+	//private List<DogEntity> dogs;
 	
 	
 	public OwnerEntity() {
@@ -101,6 +99,16 @@ public class OwnerEntity {
 	public void setState(String state) {
 		this.state = state;
 	}
+
+	/*public List<DogEntity> getDogs() {
+		return dogs;
+	}
+
+	public void setDogs(List<DogEntity> dogs) {
+		this.dogs = dogs;
+	}*/
+	
+	
 	
 	
 	
