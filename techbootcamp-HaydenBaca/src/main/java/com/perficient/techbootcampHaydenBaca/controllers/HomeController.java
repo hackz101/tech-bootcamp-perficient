@@ -30,4 +30,9 @@ public class HomeController {
 		return dogList;
 	}
 	
+	@GetMapping("/addDog")
+	public boolean addDog() {
+		return dogService.addDog();
+	}
+	
 }

@@ -25,5 +25,18 @@ public class DogService {
 		return dogList;
 	}
 	
+	public boolean addDog() {
+		List<DogEntity> dogList;
+		
+		DogEntity newDog = new DogEntity("dog", "type", 1);
+		
+		try {
+			dogRepository.save(newDog);
+			return true;
+		} catch(Exception e) { 
+			return false;
+		}
+		
+	}
 	
 }
