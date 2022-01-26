@@ -30,6 +30,7 @@ public class DogEntity {
 	@JoinColumn(name = "dogowner", referencedColumnName = "personid", nullable = false)
 	private int dogOwner;
 	
+	
 	//@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	//@JoinColumn(name = "dogowner", referencedColumnName = "personid", nullable = false)
 	//private OwnerEntity owner;
@@ -88,7 +89,10 @@ public class DogEntity {
 		this.owner = owner;
 	}*/
 	
-	
+	@Override
+	public String toString() {
+		return ("{" + dogName + ", " + dogBreed + ", " + dogOwner + "}");
+	}
 	
 	
 	

@@ -26,9 +26,8 @@ public class DogService {
 	}
 	
 	public boolean addDog() {
-		List<DogEntity> dogList;
 		
-		DogEntity newDog = new DogEntity("dog", "type", 1);
+		DogEntity newDog = new DogEntity("dog", "type", 2);
 		
 		try {
 			dogRepository.save(newDog);
@@ -37,6 +36,15 @@ public class DogService {
 			return false;
 		}
 		
+	}
+	
+	//for dog table owner id replacement
+	public List<String> getOwnerNameFromId(int id) {
+		List<String> name = new ArrayList<>();
+		name.add(ownerRepository.findByPersonID(id).getFirstName());
+		name.add(ownerRepository.findByPersonID(id).getLastName());
+		
+		return name;
 	}
 	
 }
