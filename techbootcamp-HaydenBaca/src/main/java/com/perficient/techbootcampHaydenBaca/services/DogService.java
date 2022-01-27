@@ -66,5 +66,13 @@ public class DogService {
 		}
 	}
 	
+	public void addOwner(String firstName, String lastName, String address, String city, String state) {
+		OwnerEntity newOwner = new OwnerEntity(firstName, lastName, address, city, state);
+		
+		try {
+			ownerRepository.save(newOwner);
+		} catch(Exception e) { 
+		}
+	}
 	
 }

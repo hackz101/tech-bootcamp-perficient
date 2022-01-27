@@ -80,4 +80,21 @@ public class HomeController {
 		}
 		return "redirect:/";
 	}
+	
+	@RequestMapping(value = "/addOwner", method = RequestMethod.GET)
+	public String showAddOwnerPage() {
+		return "addowner.html";
+	}
+	
+	@RequestMapping(value = "/addOwner", method = RequestMethod.POST)
+	public String addOwner(HttpServletRequest request) {
+		String firstName = request.getParameter("firstname");
+		String lastName = request.getParameter("lastname");
+		String address = request.getParameter("address");
+		String city = request.getParameter("city");
+		String state = request.getParameter("state");
+		dogService.addOwner(firstName, lastName, address, city, state);
+		
+		return "redirect:/";
+	}
 }
