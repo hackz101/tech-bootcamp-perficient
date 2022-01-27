@@ -48,9 +48,26 @@ public class HomeController {
 		String name = request.getParameter("name");
 		String breed = request.getParameter("breed");
 		int owner = Integer.parseInt(request.getParameter("ownerID"));
-		System.out.println(owner);
 		dogService.addDog(name, breed, owner);
 		return "redirect:/";
 	
+	}
+	
+	@RequestMapping(value = "/removeDog", method = RequestMethod.GET)
+	public String showRemoveDogPage(Model model) {
+		List<DogEntity> dogList= new ArrayList<>();
+		dogList.addAll(dogService.getAllDogs());
+		model.addAttribute("dogs", dogList);
+		List<OwnerEntity> ownerList= new ArrayList<>();
+		ownerList.addAll(dogService.getAllOwners());
+		model.addAttribute("dogs", dogList);
+		return "removedog.html";
+	}
+	
+	@RequestMapping(value = "/removeDog", method = RequestMethod.POST)
+	public String removeDog(HttpServletRequest request) {
+		int dogID = Integer.parseInt(request.getParameter("dog"));
+		dogService.removeDog(dogID);
+		return "redirect:/";
 	}
 }

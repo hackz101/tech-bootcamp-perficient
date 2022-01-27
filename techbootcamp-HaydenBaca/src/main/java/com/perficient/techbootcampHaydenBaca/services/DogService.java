@@ -38,6 +38,10 @@ public class DogService {
 		
 	}
 	
+	public void removeDog(int id) {
+		dogRepository.delete(dogRepository.findByDogID(id));
+	}
+	
 	//owner logic
 	public Collection<OwnerEntity> getAllOwners() {
 		List<OwnerEntity> ownerList = new ArrayList<>();
