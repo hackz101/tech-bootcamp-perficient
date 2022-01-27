@@ -16,6 +16,7 @@ public interface DogRepository extends CrudRepository<DogEntity, Integer> {
 	DogEntity findByDogID(int dogID);
 	List<DogEntity> findByDogName(String dogName);
 	List<DogEntity> findByDogBreed(String dogBreed);
+	List<DogEntity> findByDogAge(String dogAge);
 	List<DogEntity> findByDogOwner(int dogOwner);
 	
 	//update

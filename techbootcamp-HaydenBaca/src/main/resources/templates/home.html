@@ -15,12 +15,14 @@
 				<tr>
 					<th>Dog Name</th>
 					<th>Dog Breed</th>
+					<th>Dog Age</th>
 					<th>Dog Owner</th>
 				</tr>
 				<tr th:each="dog: ${dogs}">
-					<td th:text="${dog.dogName}"></td>
-					<td th:text="${dog.dogBreed}"></td>
-					<td th:text="${dog.dogOwner}"></td>
+					<td th:text="${dog.dog.dogName}"></td>
+					<td th:text="${dog.dog.dogBreed}"></td>
+					<td th:text="${dog.dog.dogAge}"></td>
+					<td th:text="${dog.owner.firstName} + ' ' + ${dog.owner.lastName}"></td>
 				</tr>
 			</tbody>
 			</table>

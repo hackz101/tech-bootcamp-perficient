@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.perficient.techbootcampHaydenBaca.DogAndOwner;
 import com.perficient.techbootcampHaydenBaca.entities.DogEntity;
 import com.perficient.techbootcampHaydenBaca.entities.OwnerEntity;
 import com.perficient.techbootcampHaydenBaca.services.DogService;
@@ -29,9 +30,14 @@ public class HomeController {
 	@GetMapping("/")
 	public String getAllDogs(Model model) {
 		List<DogEntity> dogList = new ArrayList<>();
+		List<DogAndOwner> dogAndOwnerList = new ArrayList<>();
+		
 		dogList.addAll(dogService.getAllDogs());
-		model.addAttribute("dogs", dogList);
-		System.out.println(model.getAttribute("dogs"));
+		for (int i = 0; i < dogList.size(); i++) {
+			dogAndOwnerList.add(new DogAndOwner(dogList.get(i), dogService.getOwnerById(dogList.get(i).getDogOwner())));
+		}
+		dogList.clear();
+		model.addAttribute("dogs", dogAndOwnerList);
 		return "home.html";
 	}
 	
@@ -47,8 +53,9 @@ public class HomeController {
 	public String addDog(HttpServletRequest request) {
 		String name = request.getParameter("name");
 		String breed = request.getParameter("breed");
+		int age = Integer.parseInt(request.getParameter("age"));
 		int owner = Integer.parseInt(request.getParameter("ownerID"));
-		dogService.addDog(name, breed, owner);
+		dogService.addDog(name, breed, age, owner);
 		return "redirect:/";
 	
 	}
@@ -66,8 +73,11 @@ public class HomeController {
 	
 	@RequestMapping(value = "/removeDog", method = RequestMethod.POST)
 	public String removeDog(HttpServletRequest request) {
-		int dogID = Integer.parseInt(request.getParameter("dog"));
-		dogService.removeDog(dogID);
+		String inputID = request.getParameter("dog");
+		if (!(inputID == null)) {
+			int dogID = Integer.parseInt(request.getParameter("dog"));
+			dogService.removeDog(dogID);
+		}
 		return "redirect:/";
 	}
 }

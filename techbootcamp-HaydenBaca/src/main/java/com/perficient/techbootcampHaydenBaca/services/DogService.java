@@ -27,9 +27,8 @@ public class DogService {
 		return dogList;
 	}
 	
-	public void addDog(String name, String breed, int ownerId) {
-		
-		DogEntity newDog = new DogEntity(name, breed, ownerId);
+	public void addDog(String name, String breed, int age, int ownerId) {
+		DogEntity newDog = new DogEntity(name, breed, age, ownerId);
 		
 		try {
 			dogRepository.save(newDog);
@@ -52,6 +51,15 @@ public class DogService {
 	public OwnerEntity getOwnerByName(String first, String last) {
 		try {
 			OwnerEntity owner = ownerRepository.findByFirstNameAndLastName(first, last);
+			return owner;
+		} catch(Exception e) {
+			return null;
+		}
+	}
+	
+	public OwnerEntity getOwnerById(int id) {
+		try {
+			OwnerEntity owner = ownerRepository.findByPersonID(id);
 			return owner;
 		} catch(Exception e) {
 			return null;

@@ -11,8 +11,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.springframework.stereotype.Component;
+
 @Entity
 @Table(name = "dogs")
+@Component
 public class DogEntity {
 
 	@Id
@@ -26,26 +29,24 @@ public class DogEntity {
 	@Column(name = "dogbreed", length = 255)
 	private String dogBreed;
 	
+	@Column(name = "dogage", length = 255)
+	private int dogAge;
+	
 	@Column(name = "dogowner")
 	@JoinColumn(name = "dogowner", referencedColumnName = "personid", nullable = false)
 	private int dogOwner;
-	
-	
-	//@ManyToOne(fetch = FetchType.LAZY, optional = false)
-	//@JoinColumn(name = "dogowner", referencedColumnName = "personid", nullable = false)
-	//private OwnerEntity owner;
 	
 	
 	public DogEntity() {
 		super();
 	}
 	
-	public DogEntity(String dogName, String dogBreed, int dogOwner) {//, OwnerEntity owner) {
+	public DogEntity(String dogName, String dogBreed, int dogAge, int dogOwner) {//, OwnerEntity owner) {
 		super();
 		this.dogName = dogName;
 		this.dogBreed = dogBreed;
+		this.dogAge = dogAge;
 		this.dogOwner = dogOwner;
-		//this.owner = owner;
 	}
 	
 	//getters and setters
@@ -73,6 +74,14 @@ public class DogEntity {
 		this.dogBreed = dogBreed;
 	}
 
+	public int getDogAge() {
+		return dogAge;
+	}
+
+	public void setDogAge(int dogAge) {
+		this.dogAge = dogAge;
+	}
+
 	public int getDogOwner() {
 		return dogOwner;
 	}
@@ -80,18 +89,10 @@ public class DogEntity {
 	public void setDogOwner(int dogOwner) {
 		this.dogOwner = dogOwner;
 	}
-
-	/*public OwnerEntity getOwner() {
-		return owner;
-	}
-
-	public void setOwner(OwnerEntity owner) {
-		this.owner = owner;
-	}*/
 	
 	@Override
 	public String toString() {
-		return ("{" + dogName + ", " + dogBreed + ", " + dogOwner + "}");
+		return ("{" + dogName + ", " + dogBreed + ", " + dogAge + ", " + dogOwner + "}");
 	}
 	
 	
