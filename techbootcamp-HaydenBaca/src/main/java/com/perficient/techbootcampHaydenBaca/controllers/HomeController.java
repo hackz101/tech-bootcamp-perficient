@@ -2,6 +2,9 @@ package com.perficient.techbootcampHaydenBaca.controllers;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,9 +13,11 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.perficient.techbootcampHaydenBaca.entities.DogEntity;
+import com.perficient.techbootcampHaydenBaca.entities.OwnerEntity;
 import com.perficient.techbootcampHaydenBaca.services.DogService;
 
 @Controller
@@ -30,15 +35,22 @@ public class HomeController {
 		return "home.html";
 	}
 	
-	/*@RequestMapping(value = "/addDog", method = RequestMethod.GET)
+	@RequestMapping(value = "/addDog", method = RequestMethod.GET)
 	public String showAddDogPage(Model model) {
-		model.addAttribute("dog", new DogEntity());
-		
-		return "dog";
-	}*/
-	@GetMapping("/addDog")
-	public boolean addDog() {
-		return dogService.addDog();
+		List<OwnerEntity> ownerList = new ArrayList<>();
+		ownerList.addAll(dogService.getAllOwners());
+		model.addAttribute("owners", ownerList);
+		return "adddog.html";
 	}
 	
+	@RequestMapping(value = "/addDog", method = RequestMethod.POST)
+	public String addDog(HttpServletRequest request) {
+		String name = request.getParameter("name");
+		String breed = request.getParameter("breed");
+		int owner = Integer.parseInt(request.getParameter("ownerID"));
+		System.out.println(owner);
+		dogService.addDog(name, breed, owner);
+		return "redirect:/";
+	
+	}
 }

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.perficient.techbootcampHaydenBaca.entities.DogEntity;
+import com.perficient.techbootcampHaydenBaca.entities.OwnerEntity;
 import com.perficient.techbootcampHaydenBaca.repositories.DogRepository;
 import com.perficient.techbootcampHaydenBaca.repositories.OwnerRepository;
 
@@ -19,32 +20,39 @@ public class DogService {
 	@Autowired
 	OwnerRepository ownerRepository;
 	
+	//dog logic
 	public Collection<DogEntity> getAllDogs() {
 		List<DogEntity> dogList = new ArrayList<>();
 		dogRepository.findAll().forEach(dogList::add);
 		return dogList;
 	}
 	
-	public boolean addDog() {
+	public void addDog(String name, String breed, int ownerId) {
 		
-		DogEntity newDog = new DogEntity("dog", "type", 2);
+		DogEntity newDog = new DogEntity(name, breed, ownerId);
 		
 		try {
 			dogRepository.save(newDog);
-			return true;
 		} catch(Exception e) { 
-			return false;
 		}
 		
 	}
 	
-	//for dog table owner id replacement
-	public List<String> getOwnerNameFromId(int id) {
-		List<String> name = new ArrayList<>();
-		name.add(ownerRepository.findByPersonID(id).getFirstName());
-		name.add(ownerRepository.findByPersonID(id).getLastName());
-		
-		return name;
+	//owner logic
+	public Collection<OwnerEntity> getAllOwners() {
+		List<OwnerEntity> ownerList = new ArrayList<>();
+		ownerRepository.findAll().forEach(ownerList::add);
+		return ownerList;
 	}
+	
+	public OwnerEntity getOwnerByName(String first, String last) {
+		try {
+			OwnerEntity owner = ownerRepository.findByFirstNameAndLastName(first, last);
+			return owner;
+		} catch(Exception e) {
+			return null;
+		}
+	}
+	
 	
 }

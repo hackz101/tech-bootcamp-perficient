@@ -108,8 +108,13 @@ public class OwnerEntity {
 		this.dogs = dogs;
 	}*/
 	
+	@Override
+	public String toString() {
+		return ("{" + firstName + ", " + lastName + ", " + address + ", " + city + ", " + state + "}");
+	}			
 	
 	
 	
 	
 }
+
